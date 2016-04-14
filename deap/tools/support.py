@@ -5,6 +5,7 @@ try:
 except ImportError:
     import pickle
 
+import numpy as np
 from bisect import bisect_right
 from collections import defaultdict
 from copy import deepcopy
@@ -523,7 +524,7 @@ class HallOfFame(object):
             self.insert(population[0])
         
         for ind in population:
-            if ind.fitness > self[-1].fitness or len(self) < self.maxsize:
+            if (ind.fitness > self[-1].fitness or len(self) < self.maxsize) and ind.fitness != np.nan:
                 for hofer in self:
                     # Loop through the hall of fame to check for any
                     # similar individual
